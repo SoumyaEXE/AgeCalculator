@@ -77,6 +77,15 @@ function calculateAge() {
 function getDaysInMonth(year, month) {
     return new Date(year, month + 1, 0).getDate();
 }
+
+        window.oncontextmenu = function(event) {
+            event.preventDefault();
+        };
+        document.addEventListener('keydown', function(event) {
+            if ((event.shiftKey && event.key === 'I') || (event.shiftKey && event.key === 'J')) {
+                event.preventDefault();
+            }
+        });
     </script>
 
 <footer class="sticky-footer">
