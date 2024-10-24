@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator - Soumya</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h1>Javascript<span><br>| Age Calculator.</span></h1>
+            <div class="input-box">
+                <input type="date" id="date">
+                <button onclick="calculateAge()">Calculate</button>
+            </div>
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script>
+
+let userInput = document.getElementById("date");
+userInput.max = new Date().toISOString().split("T")[0];
+let result = document.getElementById("result");
+
+function calculateAge() {
+    let birthDate = new Date(userInput.value);
+    let today = new Date();
+
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+    let hours = today.getHours() - birthDate.getHours();
+    let minutes = today.getMinutes() - birthDate.getMinutes();
+    let seconds = today.getSeconds() - birthDate.getSeconds();
+    let milliseconds = today.getMilliseconds() - birthDate.getMilliseconds();
+
+    if (milliseconds < 0) {
+        seconds--;
+        milliseconds += 1000;
+    }
+
+    if (seconds < 0) {
+        minutes--;
+        seconds += 60;
+    }
+
+    if (minutes < 0) {
+        hours--;
+        minutes += 60;
+    }
+
+    if (hours < 0) {
+        days--;
+        hours += 24;
+    }
+
+    if (days < 0) {
+        months--;
+        days += getDaysInMonth(today.getFullYear(), today.getMonth());
+    }
+
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    result.innerHTML = `
+        You are <strong><span>${years}</span></strong> years, <strong><span>${months}</span></strong> months, 
+        <strong><span>${days}</span></strong> days, <strong><span>${hours}</span></strong> hours, 
+        <strong><span>${minutes}</span></strong> minutes, <strong><span>${seconds}</span></strong> seconds, 
+        and <strong><span>${milliseconds}</span></strong> milliseconds old!
+    `;
+}
+
+function getDaysInMonth(year, month) {
+    return new Date(year, month + 1, 0).getDate();
+}
+    </script>
+
+<footer class="sticky-footer">
+    Made With 💛 By <a href="https://www.instagram.com/s0umy4_xd/" target="_blank" class="footer-link">Soumya</a>
+</footer>
+
+</body>
+</html>
